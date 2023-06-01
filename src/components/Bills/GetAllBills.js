@@ -124,7 +124,7 @@ const GetAllBills = ({ getBillByCategoryId }) => {
 
             </div>
         </>
-    );
-};
+    )
+}
 
 export default GetAllBills;
