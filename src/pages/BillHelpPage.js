@@ -9,32 +9,32 @@ const BillHelpPage = () => {
     };
     const items = [
         {
-            key: "9",
+            key: "1",
             label: `Tüm Faturalar`,
             children: <GetAllBills getBillByCategoryId={getBillByCategoryId} />,
         },
         {
-            key: "1",
+            key: "2",
             label: `Elektrik`,
             children: <GetAllBills getBillByCategoryId={getBillByCategoryId} />,
         },
         {
-            key: "5",
+            key: "3",
             label: `Su`,
             children: <GetAllBills getBillByCategoryId={getBillByCategoryId} />,
         },
         {
-            key: "6",
+            key: "4",
             label: `Doğalgaz`,
             children: <GetAllBills getBillByCategoryId={getBillByCategoryId} />,
         },
         {
-            key: "3",
+            key: "5",
             label: `Cep Telefonu`,
             children: <GetAllBills getBillByCategoryId={getBillByCategoryId} />,
         },
         {
-            key: "4",
+            key: "6",
             label: `İnternet`,
             children: <GetAllBills getBillByCategoryId={getBillByCategoryId} />,
         },
