@@ -1,31 +1,43 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { Button, Card, Col, Descriptions, Row, Space } from "antd";
+import { Button, Card, Col, Descriptions, Row, Space, Typography } from "antd";
 import Loading from "../Loading";
+import { useDispatch } from 'react-redux'
+import { getAllBills } from "../../redux/userSlice";
+
 
 const GetAllBills = ({ getBillByCategoryId }) => {
     const [bills, setBills] = useState([]);
     const [billtype, setBillType] = useState("")
     const [pageLoading, setPageLoading] = useState(true)
+    const { Title } = Typography
+    const dispatch = useDispatch()
 
-    useEffect(async () => {
+    useEffect( () => {
+        dispatch(getAllBills())
+        .then((response) => {
+            if (response?.meta?.requestStatus === 'fulfilled') {
+                if (response?.payload?.success) {
+                    const resData = response.payload.data
+                    setBills(resData)
+                } else {
+                    throw new Error(response.payload.message)
+                }
+            } else {
+                throw new Error('Get All Bills Request Failed')
+            }
+        })  
+        .catch((err) => {
+            console.error(err);
+        })
+
         let categoryId = Number(getBillByCategoryId)
         selectedBillType(categoryId)
-
-        await axios.get("https://localhost:7166/api/Bills/getbilldetails")
-        .then(async (response) => {
-            const resData = await response.data.data
-            setBills(resData)
-        })
-        .catch((error) => {
-            console.log(error)
-        });
 
         setPageLoading(true)
         setTimeout(() => {
             setPageLoading(false)
         }, 1500);
-    }, [getBillByCategoryId, billtype])
+    }, [getBillByCategoryId, billtype, dispatch])
 
     const selectedBillType = (categoryId) => {
         if (categoryId === 1) {
@@ -47,21 +59,94 @@ const GetAllBills = ({ getBillByCategoryId }) => {
         }
     }
 
-    console.log(bills);
+    const selectedBillTypeColor = (category) => {
+        if (category === "Elektrik") {
+            return "#ffda59"; 
+        } else if (category === "Su") {
+            return "#a3fff8"; 
+        } else if (category === "Doğalgaz") {
+            return "#a1acba"; 
+        } else if (category === "Cep Telefonu") {
+            return "#ff6a51"; 
+        } else if (category === "İnternet") {
+            return "#1d6087";
+        } else if (category === "TV") {
+            return "#a097d5"; 
+        } else if (category === "Telekom") {
+            return "#61854a"; 
+        } else {
+            return "red"; 
+        }
+    }
 
+    const categoryNameSplit = (category) => {
+        const categoryName = category.split(" ");
+        const firstWord = categoryName[0].split("").map((letter, index) => 
+        (
+            <span
+                key={index}
+                style={{
+                    textShadow: "1px 1px 1px black",
+                }}
+            >
+                {letter}
+            </span>
+        ))
+        const secondWord = categoryName[1].split("").map((letter, index) => 
+        (
+            <span
+                key={index}
+                style={{
+                    textShadow: "1px 1px 1px black",
+                }}
+            >
+                {letter}
+            </span>
+        ))
+    
+        return <div>{firstWord} {secondWord}</div>
+    }
+
+    const formatDateTime = (dateTimeString) => {
+        const dateTime = new Date(dateTimeString)
+        const day = dateTime.getDate().toString().padStart(2, "0")
+        const month = (dateTime.getMonth() + 1).toString().padStart(2, "0")
+        const year = dateTime.getFullYear().toString()
+        const hours = dateTime.getHours().toString().padStart(2, "0")
+        const minutes = dateTime.getMinutes().toString().padStart(2, "0")
+        const seconds = dateTime.getSeconds().toString().padStart(2, "0")
+        return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`
+    }
+
+    const textShadow = (text) => {
+        return text.split("").map((letter, index) => 
+            (
+                <span
+                    key={index}
+                    style={{
+                        textShadow: "1px 1px 1px black",
+                    }}
+                >
+                    {letter}
+                </span>
+            )
+        )    
+    }
+    
     return (
         <>
             <div className="layout-content">
                 {
                     !pageLoading ?
                     (
-                        <Row gutter={[24]}>
+                        <Row gutter={[24, 24, 24, 24]}>
                             {
                                 bills
                                 .filter((item) => billtype === "All" || item.categoryName === billtype)
                                 .map((item) => 
                                 (
-                                    <Col span={6}
+                                    <Col 
+                                        span={24} sm={12} md={12} lg={6} xl={6}
                                         style={{
                                             marginBottom: 25
                                         }}
@@ -70,24 +155,65 @@ const GetAllBills = ({ getBillByCategoryId }) => {
                                         <Card 
                                             bordered={false} 
                                             className="criclebox h-full"
+                                            style={{
+                                                border: '1px solid #CFCFCF'
+                                            }}
                                         >
-                                            <Descriptions title={item.categoryName} size="small" bordered="true">
-                                                <Descriptions.Item span={3} label="Şehir">
+                                            <Title
+                                                level={4}
+                                                style={{
+                                                    display: "flex", 
+                                                    justifyContent: "center",
+                                                    alignItems: "center",
+                                                    color: "white",
+                                                    backgroundColor: selectedBillTypeColor(item.categoryName),
+                                                    margin: 0,
+                                                    padding: '5px 10px',
+                                                    borderRadius: '10px 10px 0 0',
+                                                    //borderLeft: '1px solid black',
+                                                    //borderRight: '1px solid black',
+                                                    //borderTop: '1px solid black'
+                                                }}
+                                            >
+                                                {
+                                                    item.categoryName === "Cep Telefonu" ? 
+                                                    (
+                                                        categoryNameSplit(item.categoryName)
+                                                    )
+                                                    :
+                                                    (
+                                                        textShadow(item.categoryName)
+                                                    )
+                                                }
+                                            </Title>
+                                            <Descriptions 
+                                                size="small" 
+                                                bordered="true"
+                                                contentStyle={{
+                                                    backgroundColor: "white"
+                                                }}
+                                                style={{
+                                                   // borderLeft: '1px solid black',
+                                                    //borderRight: '1px solid black',
+                                                    //borderBottom: '1px solid black'
+                                                }}
+                                            >
+                                                <Descriptions.Item span={3} label="Şehir"  >
                                                     {item.cityName}
                                                 </Descriptions.Item>
-                                                <Descriptions.Item span={3} label="Şirket">
+                                                <Descriptions.Item span={3} label="Şirket"  >
                                                     {item.institutionName}
                                                 </Descriptions.Item>
-                                                <Descriptions.Item span={3} label="Sözleşme No">
+                                                <Descriptions.Item span={3} label="Sözleşme No"  >
                                                     {item.contractNo}
                                                 </Descriptions.Item>
-                                                <Descriptions.Item span={3} label="Fatura Kesim Tarihi">
-                                                    {item.invoiceDate}
+                                                <Descriptions.Item span={3} label="Fatura Kesim Tarihi"  >
+                                                    {formatDateTime(item.invoiceDate)}
                                                 </Descriptions.Item>
-                                                <Descriptions.Item span={3} label="Son Ödeme Tarihi">
-                                                    {item.dateOfLastPayment}
+                                                <Descriptions.Item span={3} label="Son Ödeme Tarihi"  >
+                                                    {formatDateTime(item.dateOfLastPayment)}
                                                 </Descriptions.Item>
-                                                <Descriptions.Item span={3} label="Fatura Tutarı">
+                                                <Descriptions.Item span={3} label="Fatura Tutarı"  >
                                                     {item.invoiceValue}
                                                 </Descriptions.Item>
                                             </Descriptions>
@@ -101,11 +227,18 @@ const GetAllBills = ({ getBillByCategoryId }) => {
                                             >
                                                 <Button 
                                                     type="primary"
+                                                    style={{
+                                                        color: "white",
+                                                        border: "none",
+                                                        backgroundColor: selectedBillTypeColor(item.categoryName)
+                                                    }}
                                                 > 
                                                     <a
                                                         href={item.website}
                                                     >
-                                                        Ödeme Yap
+                                                        {
+                                                            textShadow('Ödeme Yap')
+                                                        }
                                                     </a>
                                                 </Button>
                                             </Space>

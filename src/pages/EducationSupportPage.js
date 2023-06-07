@@ -1,8 +1,12 @@
 import React from 'react'
+import Main from '../components/Layout/Main'
+import Education from '../components/Education/Education'
 
 const EducationSupportPage = () => {
     return (
-        <div>EducationSupportPage</div>
+        <Main>
+            <Education/>
+        </Main>
     )
 }
 

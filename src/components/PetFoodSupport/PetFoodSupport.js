@@ -1,8 +1,8 @@
 import React from 'react'
 
-const PetFoodSupport = () => {
+function PetFoodSupport() {
     return (
-        <div>fsadfasfd</div>
+        <div>PetFoodSupport</div>
     )
 }
 
