@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Row, Col, Breadcrumb, Button, Input } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
@@ -16,22 +16,29 @@ const toggler = [
 ];
 
 const Header = ({ name, subName, onPress }) => {
-  useEffect(() => 
+  const [formattedName, setFormattedName] = useState(name)
+  useEffect(() => {
     window.scrollTo(0, 0)
-  )
+    setFormattedName(name.replace("/", ""))
+  }, [name])
+
+
+  const items = [
+    {
+      title: <NavLink to="/">Pages</NavLink>
+    },
+    {
+      title: formattedName
+    }
+  ]
 
   return (
     <>
       <Row gutter={[24, 0]}>
         <Col span={24} md={6}>
-          <Breadcrumb>
-            <Breadcrumb.Item>
-              <NavLink to="/">Pages</NavLink>
-            </Breadcrumb.Item>
-            <Breadcrumb.Item style={{ textTransform: "capitalize" }}>
-              {name.replace("/", "")}
-            </Breadcrumb.Item>
-          </Breadcrumb>
+          <Breadcrumb
+            items={items}
+          />
           <div className="ant-page-header-heading">
             <span
               className="ant-page-header-heading-title"
