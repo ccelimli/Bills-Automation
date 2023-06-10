@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
-import { Tabs } from "antd";
+import { Tabs, FloatButton  } from "antd";
+import { useSelector } from 'react-redux'
 import GetAllBills from "./GetAllBills";
 
 const BillHelp = () => {
+    const currentUserId = useSelector((state) => state.user.getUser?.data?.data?.id)
+    console.log(currentUserId);
     const [ getBillByCategoryId, SetGetBillByCategoryId ] = useState(1)
     const onChange = (key) => {
         SetGetBillByCategoryId(key)
@@ -51,13 +54,15 @@ const BillHelp = () => {
     ];
     
     return (
-        <Tabs 
-            defaultActiveKey="9" 
-            items={items} 
-            onChange={onChange} 
-            type="card"
-            centered
-        />
+        <>
+            <Tabs 
+                defaultActiveKey="1" 
+                items={items} 
+                onChange={onChange} 
+                type="card"
+            />
+            <FloatButton onClick={() => console.log('click')} />
+        </>
     )
 };
 export default BillHelp;

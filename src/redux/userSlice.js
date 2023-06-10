@@ -14,7 +14,6 @@ export const getAllBills = createAsyncThunk(
 export const userLogin = createAsyncThunk(
     'userLogin',
     async (values) => {
-        console.log("values: ", values);
         const response = await axios.post(
             "https://localhost:7166/api/Auth/login",
             {
@@ -26,19 +25,25 @@ export const userLogin = createAsyncThunk(
     }
 )
 
+export const getUserById = createAsyncThunk(
+    'getUserById',
+    async (values) => {
+        const response = await axios.get(
+            `https://localhost:7166/api/users/getbyid?id=${values.currentUserId}`
+        )
+        return response.data
+    }
+)
+
 export const userSlice = createSlice({
     name: 'user',
     initialState: {
         allBills: { data: '', loading: false, error: ''},
-        login: { data: '', loading: false, error: ''}
+        login: { data: '', loading: false, error: ''},
+        getUser: { data: '', loading: false, error: ''}
     },
-    reducers: {
-        deneme: () => {
-
-        }
-    },
+    reducers: {},
     extraReducers: (builder) => {
-
         // getAllBills
         builder.addCase(getAllBills.pending, (state, action) => {
             state.allBills.loading = true
@@ -66,7 +71,22 @@ export const userSlice = createSlice({
             state.login.loading = false
             state.login.error = 'Request Fetching Error'
         })
+
+        // getUserById
+        builder.addCase(getUserById.pending, (state, action) => {
+            state.getUser.loading = true
+            state.getUser.error = ''
+        })
+        builder.addCase(getUserById.fulfilled, (state, action) => {
+            state.getUser.data = action.payload
+            state.getUser.loading = false
+        })
+        builder.addCase(getUserById.rejected, (state, action) => {
+            state.getUser.loading = false
+            state.getUser.error = 'Request Fetching Error'
+        })
     }
 })
 
+export const { resetGetUser } = userSlice.actions
 export default userSlice.reducer
