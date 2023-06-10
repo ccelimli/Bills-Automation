@@ -178,7 +178,6 @@ const Sidenav = ({ color }) => {
 
   const handleOnClick = (item) => {
     setCurrent(item.key)
-    console.log(item.key);
   }
 
   return (
