@@ -1,27 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { Row, Col, Breadcrumb, Button, Input } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
+import { Row, Col, Breadcrumb, Button, Space, Typography } from "antd";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-
-const toggler = [
-  <svg
-    width="20"
-    height="20"
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 448 512"
-    key={0}
-  >
-    <path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"></path>
-  </svg>,
-];
+import { GrLogout } from "react-icons/gr"; 
+import { FaUser, FaUserPlus } from "react-icons/fa"; 
+import { TiThMenu } from "react-icons/ti"
+import { ImKey } from "react-icons/im"
 
 const Header = ({ name, subName, onPress }) => {
   const [formattedName, setFormattedName] = useState(name)
+  const [ isUser, setIsUser ] = useState(false)
+  const currentUser = useSelector((state) => state.user.getUser?.data?.data)
+  const { Text } = Typography
+  const navigate = useNavigate()
+
+  //console.log(isUser);
+
   useEffect(() => {
     window.scrollTo(0, 0)
     setFormattedName(name.replace("/", ""))
-  }, [name])
 
+    currentUser?.firstName !== undefined ?
+      setIsUser(true)
+      :
+      setIsUser(false)
+  }, [name, currentUser, isUser])
 
   const items = [
     {
@@ -31,6 +35,12 @@ const Header = ({ name, subName, onPress }) => {
       title: formattedName
     }
   ]
+
+  const logout = () => {
+    localStorage.removeItem('token')
+    navigate('/')
+    window.location.reload()
+  }
 
   return (
     <>
@@ -53,14 +63,120 @@ const Header = ({ name, subName, onPress }) => {
             type="link"
             className="sidebar-toggler"
             onClick={() => onPress()}
-          >
-            {toggler}
-          </Button>
-          <Input
-            className="header-search"
-            placeholder="Type here..."
-            prefix={<SearchOutlined />}
+            icon={ <TiThMenu/> }
           />
+
+          {
+              isUser ? (
+              <>
+                <Button
+                  type="link"
+                  onClick={logout}
+                >
+                  <GrLogout 
+                    style={{
+                      marginLeft: 10
+                    }}
+                  />
+                </Button>
+                <Space
+                    style={{
+                      display: 'flex',
+                      justifyContent:'center',
+                      alignItems: 'center',
+                      alignSelf: 'center',
+                      width: 'auto',
+                      height: '35px',
+                      border: '1px solid gray',
+                      padding: '0 10px',
+                      borderRadius: 10
+                    }}
+                  >
+                    <Space>
+                      <FaUser 
+                        style={{
+                          marginBottom: '3px'
+                        }}
+                      />
+                      <Text
+                        style={{
+                          fontSize: 16,
+                          fontWeight: 'bold'
+                        }}
+                      >
+                        { currentUser?.firstName + ' ' + currentUser?.lastName }
+                      </Text>
+                    </Space>
+                  </Space>
+              </>
+            )
+            : 
+            <>
+              <Space
+                style={{
+                  display: 'flex',
+                  justifyContent:'center',
+                  alignItems: 'center',
+                  alignSelf: 'center',
+                  width: 'auto',
+                  height: '35px',
+                  border: '1px solid gray',
+                  padding: '0 10px',
+                  borderRadius: 10,
+                  cursor: 'pointer'
+                }}
+                onClick={() => navigate('sign-up')}
+              >
+                <Space>
+                  <FaUserPlus 
+                    style={{
+                      marginBottom: '3px'
+                    }}
+                  />
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    Üye Ol
+                  </Text>
+                </Space>
+              </Space>
+              <Space
+                style={{
+                  display: 'flex',
+                  justifyContent:'center',
+                  alignItems: 'center',
+                  alignSelf: 'center',
+                  width: 'auto',
+                  height: '35px',
+                  border: '1px solid gray',
+                  padding: '0 10px',
+                  borderRadius: 10,
+                  marginRight: 10,
+                  cursor: 'pointer'
+                }}
+                onClick={() => navigate('sign-in')}
+              >
+                <Space>
+                  <ImKey 
+                    style={{
+                      marginBottom: '3px'
+                    }}
+                  />
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    Giriş Yap
+                  </Text>
+                </Space>
+              </Space>
+            </>
+          }
         </Col>
       </Row>
     </>

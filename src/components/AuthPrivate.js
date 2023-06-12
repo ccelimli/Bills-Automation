@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom"
+import { Navigate, useLocation } from "react-router-dom"
 import jwtDecode from 'jwt-decode'
 import { useDispatch } from 'react-redux'
 import { getUserById } from "../redux/userSlice";
@@ -7,6 +7,9 @@ import { getUserById } from "../redux/userSlice";
 const AuthPrivateRoute = ({ children }) => {
     const [isJwtToken, setIsJwtToken] = useState(false)
     const dispatch = useDispatch()
+    const { pathname } = useLocation()
+
+    console.log("isHome : ", pathname === '/');
 
     useEffect(() => {
         const checkUser = async () => {
@@ -37,9 +40,9 @@ const AuthPrivateRoute = ({ children }) => {
         checkUser()
     }, [dispatch, children, isJwtToken])
 
-    if (isJwtToken) {
+    if (isJwtToken && pathname !== '/') {
         return (
-            <Navigate
+            <Navigate 
                 to = {'/sign-in'}
             />
         )

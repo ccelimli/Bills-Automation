@@ -15,7 +15,7 @@ const routes = [
         path: '/',
         element: <GeneralLayout />,
         children: [
-            { index: true, element: <HomePage /> },
+            { index: true, element: <HomePage />, auth: true },
             { path: 'bills', element: <BillHelpPage />, auth: true },
             { path: 'donation', element: <DonationPage />, auth: true },
             { path: 'educationSupport', element: <EducationSupportPage />, auth: true },
