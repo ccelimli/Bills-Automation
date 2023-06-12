@@ -1,16 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit' 
 import axios from 'axios'
 
-export const getAllBills = createAsyncThunk(
-    'getAllBills',
-    async () => {
-        const response = await axios.get(
-            "https://localhost:7166/api/Bills/getbilldetails"
-        )
-        return response.data
-    }
-)
-
 export const userLogin = createAsyncThunk(
     'userLogin',
     async (values) => {
@@ -19,6 +9,28 @@ export const userLogin = createAsyncThunk(
             {
                 nationalityId: values.tcNumber,
                 password: values.password
+            }
+        )
+        return response.data
+    }
+)
+
+export const userRegister = createAsyncThunk(
+    'userRegister',
+    async (values) => {
+        console.log('values : ', values);
+        const response = await axios.post(
+            "https://localhost:7166/api/Auth/register",
+            {
+                "firstName": values.firstName,
+                "lastName": values.lastName,
+                "phoneNumber": values.phoneNumber,
+                "address": values.address,
+                "cityId": values.cityId,
+                "birthday": values.birthday,
+                "nationalityNo": values.nationalityNo,
+                "email": values.email,
+                "password": values.password
             }
         )
         return response.data
@@ -38,26 +50,12 @@ export const getUserById = createAsyncThunk(
 export const userSlice = createSlice({
     name: 'user',
     initialState: {
-        allBills: { data: '', loading: false, error: ''},
         login: { data: '', loading: false, error: ''},
+        register: { data: '', loading: false, error: ''},
         getUser: { data: '', loading: false, error: ''}
     },
     reducers: {},
     extraReducers: (builder) => {
-        // getAllBills
-        builder.addCase(getAllBills.pending, (state, action) => {
-            state.allBills.loading = true
-            state.allBills.error = ''
-        })
-        builder.addCase(getAllBills.fulfilled, (state, action) => {
-            state.allBills.data = action.payload
-            state.allBills.loading = false
-        })
-        builder.addCase(getAllBills.rejected, (state, action) => {
-            state.allBills.loading = false
-            state.allBills.error = 'Request Fetching Error'
-        })
-
         // userLogin
         builder.addCase(userLogin.pending, (state, action) => {
             state.login.loading = true
@@ -70,6 +68,20 @@ export const userSlice = createSlice({
         builder.addCase(userLogin.rejected, (state, action) => {
             state.login.loading = false
             state.login.error = 'Request Fetching Error'
+        })
+
+        // userRegister
+        builder.addCase(userRegister.pending, (state, action) => {
+            state.register.loading = true
+            state.register.error = ''
+        })
+        builder.addCase(userRegister.fulfilled, (state, action) => {
+            state.register.data = action.payload
+            state.register.loading = false
+        })
+        builder.addCase(userRegister.rejected, (state, action) => {
+            state.register.loading = false
+            state.register.error = 'Request Fetching Error'
         })
 
         // getUserById
@@ -88,5 +100,4 @@ export const userSlice = createSlice({
     }
 })
 
-export const { resetGetUser } = userSlice.actions
 export default userSlice.reducer

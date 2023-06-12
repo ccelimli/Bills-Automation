@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Tabs, FloatButton  } from "antd";
+import { Tabs } from "antd";
 import { useSelector } from 'react-redux'
 import GetAllBills from "./GetAllBills";
 
@@ -61,7 +61,6 @@ const BillHelp = () => {
                 onChange={onChange} 
                 type="card"
             />
-            <FloatButton onClick={() => console.log('click')} />
         </>
     )
 };

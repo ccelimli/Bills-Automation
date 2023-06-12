@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Button, Card, Col, Descriptions, Row, Space, Typography } from "antd";
-import Loading from "../Loading";
 import { useDispatch } from 'react-redux'
-import { getAllBills } from "../../redux/userSlice";
-
+import { getAllBills } from "../../redux/crudSlice";
+import Loading from "../Loading";
+import AddBill from './AddBill'
+import { ToastContainer } from "react-toastify";
 
 const GetAllBills = ({ getBillByCategoryId }) => {
     const [bills, setBills] = useState([]);
@@ -135,7 +136,21 @@ const GetAllBills = ({ getBillByCategoryId }) => {
     
     return (
         <>
+        <ToastContainer
+            position="top-right"
+            autoClose={3000}
+            limit={3}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+        />
             <div className="layout-content">
+            
                 {
                     !pageLoading ?
                     (
@@ -248,14 +263,15 @@ const GetAllBills = ({ getBillByCategoryId }) => {
                                 )
                             }
                         </Row>
+                        
                     )
                     :
                     (
                         <Loading pageLoading={pageLoading} />
                     )
                 }
-
             </div>
+            <AddBill />
         </>
     )
 }
