@@ -22,7 +22,7 @@ const routes = [
             { path: 'petFoodSupport', element: <PetFoodSupportPage />, auth: true },
             { path: 'sign-in', element: <SignIn /> },
             { path: 'sign-up', element: <SignUp /> },
-            { path: '*', element: <GeneralNotFoundPage /> }
+            { path: '*', element: <GeneralNotFoundPage /> },
         ]
     }
 ]

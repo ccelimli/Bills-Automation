@@ -11,7 +11,7 @@ const Footer = () => {
           <div className="copyright">
             © 2023 made with by
             <a href="#pablo" className="font-weight-bold" target="_blank">
-              Creative Tim
+              Creative Timm
             </a>
           </div>
         </Col>

@@ -2,7 +2,7 @@ import React from 'react'
 
 function PetFoodSupport() {
     return (
-        <div>PetFoodSupport</div>
+        <div>PetFoodSupport </div>
     )
 }
 

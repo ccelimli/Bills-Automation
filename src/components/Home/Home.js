@@ -14,7 +14,6 @@ const Home = () => {
                 test <br/>
                 test <br/>
                 test <br/>
-                test <br/>
                 </Card>
             </Col>
             <Col span={8}>

@@ -30,7 +30,7 @@ export const userRegister = createAsyncThunk(
                 "birthday": values.birthday,
                 "nationalityNo": values.nationalityNo,
                 "email": values.email,
-                "password": values.password
+                "password": values.password,
             }
         )
         return response.data
