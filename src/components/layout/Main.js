@@ -17,7 +17,7 @@ const Main = ({ children }) => {
     const handleSidenavColor = (color) => setSidenavColor(color);
 
     let { pathname } = useLocation();
-    pathname = pathname.replace("/", "");
+    pathname = pathname.replace("/", "")
 
     return (
         <Layout

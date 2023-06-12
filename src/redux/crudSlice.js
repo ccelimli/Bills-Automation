@@ -54,7 +54,7 @@ export const addBills = createAsyncThunk(
                 "contractNo": values.contractNo,
                 "invoiceDate": values.invoiceDate,
                 "dateOfLastPayment": values.lastPaymentDate,
-                "invoiceValue": values.invoiceValue
+                "invoiceValue": values.invoiceValue,
             }
         )
         return response.data

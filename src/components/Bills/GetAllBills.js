@@ -125,7 +125,7 @@ const GetAllBills = ({ getBillByCategoryId }) => {
                 <span
                     key={index}
                     style={{
-                        textShadow: "1px 1px 1px black",
+                        textShadow: "1px 1px 1px black"
                     }}
                 >
                     {letter}

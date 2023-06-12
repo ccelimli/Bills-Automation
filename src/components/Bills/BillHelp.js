@@ -5,7 +5,7 @@ import GetAllBills from "./GetAllBills";
 
 const BillHelp = () => {
     const currentUserId = useSelector((state) => state.user.getUser?.data?.data?.id)
-    console.log(currentUserId);
+    console.log(currentUserId)
     const [ getBillByCategoryId, SetGetBillByCategoryId ] = useState(1)
     const onChange = (key) => {
         SetGetBillByCategoryId(key)

@@ -87,10 +87,10 @@ const AddBill = () => {
         },
         wrapperCol: {
             xs: {
-                span: 24,
+                span: 24
             },
             sm: {
-                span: 16,
+                span: 16
             }
         }
     }

@@ -168,7 +168,7 @@ const Header = ({ name, subName, onPress }) => {
                   <Text
                     style={{
                       fontSize: 16,
-                      fontWeight: 'bold'
+                      fontWeight: 'bold',
                     }}
                   >
                     Giriş Yap

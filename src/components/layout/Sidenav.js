@@ -9,7 +9,7 @@ import { FaDog } from "react-icons/fa";
 
 const Sidenav = ({ color }) => {
   const [current, setCurrent] = useState('1');
-  const { pathname } = useLocation();
+  const { pathname } = useLocation()
 
   const getItem = (label, key) => {
     return {

@@ -9,7 +9,7 @@ function Loading({ pageLoading }) {
                 justifyContent: "center",
                 alignItems: "center",
                 width: "100%",
-                height: 500
+                height: 500,
             }}
         >
             <SquareLoader
