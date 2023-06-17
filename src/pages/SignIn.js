@@ -115,7 +115,7 @@ const SignIn = () => {
                   // }
                 ]}
               >
-                <Input placeholder="Şifre" />
+                <Input.Password placeholder="Şifre" />
               </Form.Item>
 
               <Form.Item>

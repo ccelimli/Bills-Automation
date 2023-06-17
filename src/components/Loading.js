@@ -1,5 +1,5 @@
 import React from 'react'
-import { SquareLoader } from 'react-spinners'
+import { PropagateLoader } from 'react-spinners'
 
 function Loading({ pageLoading }) {
     return (
@@ -12,9 +12,9 @@ function Loading({ pageLoading }) {
                 height: 500,
             }}
         >
-            <SquareLoader
-                size={50}
-                color='#0D6EFD'
+            <PropagateLoader
+                size={15}
+                color='#F2D2BD'
                 loading={pageLoading}
             />
         </div>

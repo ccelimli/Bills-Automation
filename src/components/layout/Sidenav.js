@@ -24,7 +24,7 @@ const Sidenav = ({ color }) => {
         <NavLink 
           to="/"
           style={{
-            backgroundColor: pathname === '/' ? '#ffda59' : ''
+            backgroundColor: pathname === '/' ? '#ffe9a3' : ''
           }}
         >
           <span 
@@ -38,7 +38,7 @@ const Sidenav = ({ color }) => {
             <IoHome  
               style={{
                 fontSize: 27,
-                backgroundColor: pathname === '/' ? 'black' : "",
+                backgroundColor: pathname === '/' ? '#ffc300' : "",
                 padding: 5,
                 margin: 5,
                 borderRadius: 5
@@ -55,7 +55,7 @@ const Sidenav = ({ color }) => {
         <NavLink 
           to="/bills"
           style={{
-            backgroundColor: pathname === '/bills' ? '#61854a' : '',
+            backgroundColor: pathname === '/bills' ? '#9aff9a' : '',
           }}
         >
           <span 
@@ -69,7 +69,7 @@ const Sidenav = ({ color }) => {
             <BsCreditCardFill  
               style={{
                 fontSize: 27,
-                backgroundColor: pathname === '/bills' ? 'black' : "",
+                backgroundColor: pathname === '/bills' ? '#548b54' : "",
                 padding: 5,
                 margin: 5,
                 borderRadius: 5
@@ -100,7 +100,7 @@ const Sidenav = ({ color }) => {
             <FaHandHoldingHeart  
               style={{
                 fontSize: 27,
-                backgroundColor: pathname === '/donation' ? 'black' : "",
+                backgroundColor: pathname === '/donation' ? '#616670' : "",
                 padding: 5,
                 margin: 5,
                 borderRadius: 5
@@ -117,7 +117,7 @@ const Sidenav = ({ color }) => {
         <NavLink 
           to="/educationSupport"
           style={{
-            backgroundColor: pathname === '/educationSupport' ? '#ff6a51' : '',
+            backgroundColor: pathname === '/educationSupport' ? '#ff7a66' : '',
           }}
         >
           <span 
@@ -131,7 +131,7 @@ const Sidenav = ({ color }) => {
             <IoSchool  
               style={{
                 fontSize: 27,
-                backgroundColor: pathname === '/educationSupport' ? 'black' : "",
+                backgroundColor: pathname === '/educationSupport' ? '#c63d25' : "",
                 padding: 5,
                 margin: 5,
                 borderRadius: 5
@@ -162,7 +162,7 @@ const Sidenav = ({ color }) => {
             <FaDog  
               style={{
                 fontSize: 27,
-                backgroundColor: pathname === '/petFoodSupport' ? 'black' : "",
+                backgroundColor: pathname === '/petFoodSupport' ? '#605f87' : "",
                 padding: 5,
                 margin: 5,
                 borderRadius: 5

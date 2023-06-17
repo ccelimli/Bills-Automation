@@ -9,8 +9,6 @@ const AuthPrivateRoute = ({ children }) => {
     const dispatch = useDispatch()
     const { pathname } = useLocation()
 
-    console.log("isHome : ", pathname === '/');
-
     useEffect(() => {
         const checkUser = async () => {
             const token = localStorage.getItem('token')

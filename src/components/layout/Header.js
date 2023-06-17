@@ -1,25 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { Row, Col, Breadcrumb, Button, Space, Typography } from "antd";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { NavLink } from "react-router-dom";
-import { GrLogout } from "react-icons/gr"; 
-import { FaUser, FaUserPlus } from "react-icons/fa"; 
+import React, { useEffect, useState } from "react"
+import { Row, Col, Button, Space, Typography } from "antd"
+import { useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
+import { GrLogout } from "react-icons/gr"
+import { FaUser, FaUserPlus } from "react-icons/fa"
 import { TiThMenu } from "react-icons/ti"
 import { ImKey } from "react-icons/im"
 
 const Header = ({ name, subName, onPress }) => {
-  const [formattedName, setFormattedName] = useState(name)
   const [ isUser, setIsUser ] = useState(false)
   const currentUser = useSelector((state) => state.user.getUser?.data?.data)
   const { Text } = Typography
   const navigate = useNavigate()
 
-  //console.log(isUser);
-
   useEffect(() => {
     window.scrollTo(0, 0)
-    setFormattedName(name.replace("/", ""))
 
     currentUser?.firstName !== undefined ?
       setIsUser(true)
@@ -27,34 +22,36 @@ const Header = ({ name, subName, onPress }) => {
       setIsUser(false)
   }, [name, currentUser, isUser])
 
-  const items = [
-    {
-      title: <NavLink to="/">Pages</NavLink>
-    },
-    {
-      title: formattedName
-    }
-  ]
-
   const logout = () => {
     localStorage.removeItem('token')
     navigate('/')
     window.location.reload()
   }
 
+  const convertSubNameToTR = (subName) => {
+    if (subName === 'bills') {
+      return 'Fatura Yardımı'
+    } else if (subName === 'donation') {
+      return 'Bağış'
+    } else if (subName === 'educationSupport') {
+      return 'Eğitim Destek'
+    } else if (subName === 'petFoodSupport') {
+      return 'Mama Destek'
+    } else {
+      return 'Anasayfa'
+    }
+  }
+
   return (
     <>
       <Row gutter={[24, 0]}>
         <Col span={24} md={6}>
-          <Breadcrumb
-            items={items}
-          />
           <div className="ant-page-header-heading">
             <span
               className="ant-page-header-heading-title"
               style={{ textTransform: "capitalize" }}
             >
-              {subName.replace("/", "")}
+              {convertSubNameToTR(subName)}
             </span>
           </div>
         </Col>
@@ -126,6 +123,7 @@ const Header = ({ name, subName, onPress }) => {
                   cursor: 'pointer'
                 }}
                 onClick={() => navigate('sign-up')}
+
               >
                 <Space>
                   <FaUserPlus 
@@ -139,7 +137,7 @@ const Header = ({ name, subName, onPress }) => {
                       fontWeight: 'bold'
                     }}
                   >
-                    Üye Ol
+                    Kayıt Ol
                   </Text>
                 </Space>
               </Space>

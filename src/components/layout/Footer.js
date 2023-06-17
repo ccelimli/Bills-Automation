@@ -8,53 +8,11 @@ const Footer = () => {
     <AntFooter style={{ background: "#fafafa" }}>
       <Row className="just">
         <Col xs={24} md={12} lg={12}>
-          <div className="copyright">
+          <div className="copyright" >
             © 2023 made with by
             <a href="#pablo" className="font-weight-bold" target="_blank">
-              Creative Timm
+              Cemal Çelimli
             </a>
-          </div>
-        </Col>
-        <Col xs={24} md={12} lg={12}>
-          <div className="footer-menu">
-            <ul>
-              <li className="nav-item">
-                <a
-                  href="#pablo"
-                  className="nav-link text-muted"
-                  target="_blank"
-                >
-                  Link1
-                </a>
-              </li>
-              <li className="nav-item">
-                <a
-                  href="#pablo"
-                  className="nav-link text-muted"
-                  target="_blank"
-                >
-                  Link2
-                </a>
-              </li>
-              <li className="nav-item">
-                <a
-                  href="#pablo"
-                  className="nav-link text-muted"
-                  target="_blank"
-                >
-                  Link3
-                </a>
-              </li>
-              <li className="nav-item">
-                <a
-                  href="#pablo"
-                  className="nav-link pe-0 text-muted"
-                  target="_blank"
-                >
-                  Link3
-                </a>
-              </li>
-            </ul>
           </div>
         </Col>
       </Row>

@@ -8,15 +8,15 @@ import Footer from "./Footer";
 const { Header: AntHeader, Content, Sider } = Layout;
 
 const Main = ({ children }) => {
-    const [visible, setVisible] = useState(false);
-    const [sidenavColor, setSidenavColor] = useState("#1890ff");
-    const [sidenavType, setSidenavType] = useState("transparent");
+    const [visible, setVisible] = useState(false)
+    const [sidenavColor, setSidenavColor] = useState("#1890ff")
+    const [sidenavType, setSidenavType] = useState("transparent")
 
-    const openDrawer = () => setVisible(!visible);
-    const handleSidenavType = (type) => setSidenavType(type);
-    const handleSidenavColor = (color) => setSidenavColor(color);
+    const openDrawer = () => setVisible(!visible)
+    const handleSidenavType = (type) => setSidenavType(type)
+    const handleSidenavColor = (color) => setSidenavColor(color)
 
-    let { pathname } = useLocation();
+    let { pathname } = useLocation()
     pathname = pathname.replace("/", "")
 
     return (
@@ -28,7 +28,7 @@ const Main = ({ children }) => {
                 placement= "left"
                 closable={false}
                 onClose={() => setVisible(false)}
-                visible={visible}
+                open={visible}
                 key="left"
                 width={250}
                 className="drawer-sidebar"

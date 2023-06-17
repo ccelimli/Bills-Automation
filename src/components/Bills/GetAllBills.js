@@ -136,21 +136,20 @@ const GetAllBills = ({ getBillByCategoryId }) => {
     
     return (
         <>
-        <ToastContainer
-            position="top-right"
-            autoClose={3000}
-            limit={3}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="colored"
-        />
+            <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                limit={3}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+            />
             <div className="layout-content">
-            
                 {
                     !pageLoading ?
                     (
@@ -171,7 +170,7 @@ const GetAllBills = ({ getBillByCategoryId }) => {
                                             bordered={false} 
                                             className="criclebox h-full"
                                             style={{
-                                                border: '1px solid #CFCFCF'
+                                                border: `1px solid ${selectedBillTypeColor(item.categoryName)}`
                                             }}
                                         >
                                             <Title
@@ -184,10 +183,7 @@ const GetAllBills = ({ getBillByCategoryId }) => {
                                                     backgroundColor: selectedBillTypeColor(item.categoryName),
                                                     margin: 0,
                                                     padding: '5px 10px',
-                                                    borderRadius: '10px 10px 0 0',
-                                                    //borderLeft: '1px solid black',
-                                                    //borderRight: '1px solid black',
-                                                    //borderTop: '1px solid black'
+                                                    borderRadius: '10px 10px 0 0'
                                                 }}
                                             >
                                                 {
@@ -206,11 +202,6 @@ const GetAllBills = ({ getBillByCategoryId }) => {
                                                 bordered="true"
                                                 contentStyle={{
                                                     backgroundColor: "white"
-                                                }}
-                                                style={{
-                                                   // borderLeft: '1px solid black',
-                                                    //borderRight: '1px solid black',
-                                                    //borderBottom: '1px solid black'
                                                 }}
                                             >
                                                 <Descriptions.Item span={3} label="Şehir"  >
